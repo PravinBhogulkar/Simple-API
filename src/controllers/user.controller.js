@@ -19,7 +19,7 @@ const addUser =  (req,res) => {
     const { body: user } = req;
     const addNewUser = userService.addUser(user);
     logger.info("Creating a user");
-
+    
     return res.status(StatusCodes.CREATED).send({
         status: STATUS.success, 
         data:addNewUser,
@@ -39,9 +39,8 @@ const updateUser = (req,res) => {
     const id = parseInt(req.params.id,10);
     const updatedUser = userService.updateUser(id, user);
     
-    logger.info(`Updating "${id}" user`);
-
     if (updatedUser){
+        logger.info(`Updating "${id}" user`);
         return res.status(StatusCodes.OK).send({
             status: STATUS.success,
             data: updatedUser,
@@ -65,8 +64,8 @@ const updateUser = (req,res) => {
 const removeUser = (req,res) => {
     const id = parseInt(req.params.id,10);
     const user = userService.getUser(id);
-    logger.info(`Removing "${id}" user`);
     if (user){
+        logger.info(`Removing "${id}" user`);
         userService.removeUser(id);
         return res.status(StatusCodes.OK).send({
             status: STATUS.success,
@@ -115,9 +114,9 @@ const getUser = (req,res) => {
     const id = parseInt(req.params.id,10);
     const user = userService.getUser(id);
 
-    logger.info(`Retrive "${id}" user.`);
-
+    
     if (user){
+        logger.info(`Retrive "${id}" user.`);
         return res.status(StatusCodes.OK).send({
             status: STATUS.success,
             data: user,
